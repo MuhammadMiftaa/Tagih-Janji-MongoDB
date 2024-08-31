@@ -1,0 +1,25 @@
+export type ArticleType = {
+  _id: string;
+  penulis: string;
+  tanggal: string;
+  judul: string;
+  "paragraf_1.1": string;
+  "paragraf_1.2": string;
+  "paragraf_2.1": string;
+  "paragraf_2.2": string;
+  subjudul: string;
+  "paragraf_3.1": string;
+  "paragraf_3.2": string;
+  "paragraf_3.3": string;
+  kutipan_1: string;
+  kutipan_2: string;
+  kategori: string;
+  tags: string[];
+  sumber: string;
+  lokasi: string;
+  waktu_publikasi: string;
+  referensi: string[];
+  lama_baca: string;
+  jumlah_kata: string;
+  bahasa: string;
+};

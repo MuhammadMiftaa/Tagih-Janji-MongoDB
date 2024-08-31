@@ -32,7 +32,6 @@ export const getServerSideProps: GetServerSideProps<ConnectionStatus> = async (
 
 export default function ArticlePage(props: { dataArtikel: ArticleType }) {
   const { dataArtikel } = props;
-  console.log(dataArtikel);
 
   return (
     <main className="py-32">

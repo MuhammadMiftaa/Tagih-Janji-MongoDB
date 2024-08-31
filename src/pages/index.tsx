@@ -290,7 +290,7 @@ export default function Home(props: {
               </div>
             </div>
             <div className="px-48 flex justify-center items-center h-[40rem] flex-col relative">
-              <p className="text-neutral-900 font-lora dark:text-neutral-400 text-xl md:text-3xl max-w-3xl mx-auto">
+              <div className="text-neutral-900 font-lora dark:text-neutral-400 text-xl md:text-3xl max-w-3xl mx-auto">
                 <span className="text-7xl">
                   <MdFormatQuote />
                 </span>
@@ -329,7 +329,7 @@ export default function Home(props: {
                 Kita semua memiliki peran dalam memastikan janji-janji ini bukan
                 sekadar kata-kata, tetapi menjadi kenyataan yang membawa
                 perubahan nyata bagi bangsa.
-              </p>
+              </div>
               <div className="h-1 w-32 border-b-2 border-black absolute bottom-7 right-72"></div>
             </div>
           </div>

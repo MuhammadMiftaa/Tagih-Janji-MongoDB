@@ -53,8 +53,8 @@ export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
           };
           const formattedDate = date.toLocaleDateString("en-US", options);
           return (
-            <>
-              <div className="flex w-full gap-10 group" key={artikel._id}>
+            <div key={artikel._id}>
+              <div className="flex w-full gap-10 group">
                 <h1 className="font-lora text-zinc-500 text-xs basis-1/5 ">
                   {formattedDate}
                 </h1>
@@ -83,7 +83,7 @@ export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
                 />
               </div>
               <hr />
-            </>
+            </div>
           );
         })}
       </div>

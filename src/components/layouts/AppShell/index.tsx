@@ -4,6 +4,7 @@ import { VscSymbolKeyword } from "react-icons/vsc";
 import { FloatingNav } from "@/src/components/ui/floating-navbar";
 import Link from "next/link";
 import { HiOutlineArrowUp } from "react-icons/hi";
+import { useRouter } from "next/router";
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -50,9 +51,16 @@ export default function AppShell(props: AppShellProps) {
     };
   }, []);
 
+  const { query } = useRouter();
+
   return (
-    <div>
-      <FloatingNav className="font-urbanist" navItems={navItems} />
+    <div className="relative">
+      <FloatingNav
+        className={`font-urbanist ${
+          query.janji ? "bg-slate-50" : "bg-transparent"
+        }`}
+        navItems={navItems}
+      />
       {children}
       {isVisible && (
         <Link
@@ -62,8 +70,8 @@ export default function AppShell(props: AppShellProps) {
           <HiOutlineArrowUp />
         </Link>
       )}
-      <footer
-        className="bg-yellow shadow dark:bg-gray-800 font-lora"
+      {/* <footer
+        className="bg-transparent bottom-0 absolute right-0 left-0 shadow dark:bg-gray-800 font-lora"
         style={{ boxShadow: "-0.5px -0.5px 3px #000" }}
       >
         <div className="w-full mx-auto max-w-screen-xl p-6 md:flex md:items-center md:justify-between">
@@ -96,7 +104,7 @@ export default function AppShell(props: AppShellProps) {
             </li>
           </ul>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }

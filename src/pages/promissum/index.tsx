@@ -8,6 +8,8 @@ import client from "@/src/lib/mongodb";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import { log } from "console";
 import { useRouter } from "next/router";
+import { AuroraBackground } from "@/src/components/ui/aurora-background";
+import { motion } from "framer-motion";
 
 type ConnectionStatus = {
   isConnected: boolean;

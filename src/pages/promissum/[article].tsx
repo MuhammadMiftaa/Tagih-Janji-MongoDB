@@ -38,7 +38,7 @@ export default function ArticlePage(props: { dataArtikel: ArticleType }) {
       <div className="flex flex-row pb-20">
         <div className=" basis-1/2 pl-10 pt-10 pr-5 flex flex-col">
           <h1 className="uppercase font-lora text-4xl">
-            {dataArtikel.judul}.<span className="-tracking-[5px]">———</span>
+            {dataArtikel.judul}<span className="-tracking-[5px]">———</span>
           </h1>
           <Image
             className="mt-40 w-1/2"
@@ -112,7 +112,7 @@ export default function ArticlePage(props: { dataArtikel: ArticleType }) {
           </div>
         </div>
       </div>
-      <div className="h-screen w-screen flex justify-center items-center ">
+      <div className="h-screen w-full flex justify-center items-center ">
         <p className="text-5xl font-lora w-3/4 relative">
           <span className="text-7xl">
             <MdFormatQuote />

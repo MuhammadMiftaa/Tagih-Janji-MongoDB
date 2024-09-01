@@ -10,6 +10,8 @@ const nextConfig = {
       "asset.kompas.com",
       "blue.kumparan.com",
       "thumb.viva.co.id",
+      "images.unsplash.com",
+      "sinpo.id"
     ],
   },
 };

@@ -54,7 +54,7 @@ export default function AppShell(props: AppShellProps) {
   const { query } = useRouter();
 
   return (
-    <div className="relative">
+    <div>
       <FloatingNav
         className={`font-urbanist ${
           query.janji ? "bg-slate-50" : "bg-transparent"

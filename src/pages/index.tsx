@@ -11,58 +11,248 @@ import { LinkPreview } from "@/src/components/ui/link-preview";
 import TextReveal from "@/src/components/magicui/text-reveal";
 import { cn } from "@/src/lib/utils";
 import { motion } from "framer-motion";
-
-type ConnectionStatus = {
-  isConnected: boolean;
-};
-
-const inter = Inter({ subsets: ["latin"] });
-
-export const getServerSideProps: GetServerSideProps<
-  ConnectionStatus
-> = async () => {
-  try {
-    await client.connect(); // `await client.connect()` will use the default database passed in the MONGODB_URI
-    const data1 = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/janji-presiden`
-    ).then((res) => res.json());
-
-    const data2 = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/3janji`
-    ).then((res) => res.json());
-
-    return {
-      props: {
-        janji: data2.data,
-        janjiPresiden: data1.data,
-        isConnected: true,
-      },
-    };
-  } catch (e) {
-    console.error(e);
-    return {
-      props: { isConnected: false },
-    };
-  }
-};
+import { JanjiPresidenType } from "../components/types/janjiPresiden";
+import { JanjiType } from "../components/types/janji";
+import { ConnectionStatus } from "../components/types/ConnectionStatus";
 
 export default function Home(props: {
-  janji: {
-    _id: string;
-    judul: string;
-    sumber: string;
-    tanggal: string;
-    gambar: string;
-    gif: string;
-    konten: {
-      judul: string;
-      deskripsi: string;
-    }[];
-  }[];
-  janjiPresiden: { _id: string; title: string; description: string }[];
+  janji: JanjiType[];
+  janjiPresiden: JanjiPresidenType[];
   isConnected: boolean;
 }) {
-  const { janji, janjiPresiden } = props;
+  // const { janji, janjiPresiden } = props;
+
+  const janji = [
+    {
+      _id: "66d2cf2be273b9e4470d941e",
+      judul: "Melanjutkan Pembangunan Ikn",
+      sumber: "CNN Indonesia",
+      tanggal: "12 Agustus 2024",
+      gambar:
+        "group w-full cursor-pointer overflow-hidden relative card h-[27rem] rounded-md shadow-xl mx-auto flex flex-col justify-end p-4 border border-transparent dark:border-neutral-800 bg-[url(https://hypeabis.id/assets/content/20230425154852000000istanaNyoman.jpg)] bg-cover before:bg-[url(/gif/pembangunan-ikn.gif)] before:fixed before:inset-0 before:opacity-0 before:z-[-1] hover:bg-[url(/gif/pembangunan-ikn.gif)] hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:bg-black hover:after:opacity-50 transition-all duration-500",
+      gif: "pembangunan-ikn.gif",
+      konten: [
+        {
+          judul: "Pernyataan Janji",
+          deskripsi:
+            'Calon Presiden 2024-2029 terpilih Prabowo Subianto berjanji akan melanjutkan pembangunan proyek Ibu Kota Nusantara (IKN) warisan Presiden Joko Widodo (Jokowi). Meskipun proses penyelesaiannya bisa memakan waktu hingga puluhan tahun, Prabowo berkomitmen agar IKN di 5 tahun masa pemerintahannya bakal difungsikan dengan baik. "Oh pasti kita selesaikan. Walaupun memang rencana garis besarnya kalau tidak salah belasan tahun untuk (diselesaikan), kalau tidak salah pernah disebut berapa puluh tahun. Sebagaimana ibu kota negara lain juga sangat panjang," ujarnya dalam keterangan pers bersama Presiden Joko Widodo (Jokowi) di IKN, Senin (12/8/2024). Usai melihat langsung, Prabowo mengaku optimistis terhadap progres pembangunan Ibu Kota Nusantara. Oleh karenanya, ia berkomitmen agar pembangunan ini terus berjalan, bahkan kalau bisa ia ingin mempercepatnya. "Saya bukan ahli teknik, tapi saya lihat potensinya, saya yakin (IKN Nusantara) 5-6 tahun akan bagus. Tapi tentunya nanti pakar-pakar semuanya harus dikerahkan, dikerahkan semua kemampuan kita," kata Prabowo.',
+        },
+        {
+          judul: "Latar Belakang dan Konteks",
+          deskripsi:
+            "Pembangunan IKN di Kalimantan Timur merupakan upaya pemerintah untuk memindahkan pusat pemerintahan dari Jakarta, yang saat ini menghadapi berbagai masalah seperti kemacetan, polusi, banjir, dan kepadatan penduduk. Pemerintah berargumen bahwa pemindahan ibu kota akan mendorong pemerataan ekonomi dan pembangunan di luar Pulau Jawa serta mengurangi beban di Jakarta. Konsep IKN ini diharapkan menjadi kota pintar yang ramah lingkungan dengan penggunaan teknologi canggih dan energi terbarukan. Berdasarkan data Bappenas, pembangunan IKN akan menghabiskan biaya sebesar Rp 466 triliun, dengan 19% dari APBN dan sisanya dari investasi swasta dan kerjasama pemerintah dengan badan usaha (KPBU).",
+        },
+        {
+          judul: "Rencana Implementasi",
+          deskripsi:
+            "Pembangunan IKN terbagi menjadi beberapa tahap hingga tahun 2045. Tahap pertama (2022-2024) mencakup pembangunan infrastruktur dasar, gedung pemerintahan, dan perumahan bagi pegawai negeri. Pemerintah juga mengumumkan akan memindahkan sebagian instansi pemerintahan dan pegawai ke IKN pada tahun 2024. Inisiatif ini melibatkan pembangunan berbagai fasilitas publik, seperti rumah sakit, sekolah, dan transportasi umum berbasis listrik. Rencana ini akan dilakukan dengan pendekatan berkelanjutan yang menitikberatkan pada pelestarian lingkungan, misalnya penggunaan lahan non-hutan dan rehabilitasi ekosistem.",
+        },
+        {
+          judul: "Perkembangan Terkini",
+          deskripsi:
+            "Hingga 2024, beberapa pembangunan infrastruktur dasar, seperti jalan utama dan instalasi air bersih, telah dimulai. Pemerintah terus melakukan promosi dan lobi untuk menarik investasi dari sektor swasta baik domestik maupun internasional. Beberapa negara, seperti Uni Emirat Arab dan Korea Selatan, menunjukkan minat untuk berinvestasi di IKN. Kementerian PUPR melaporkan bahwa progres pembangunan infrastruktur di kawasan inti pemerintahan sudah mencapai sekitar 20%.",
+        },
+        {
+          judul: "Dampak yang Diharapkan",
+          deskripsi:
+            'Pemerintah berharap pembangunan IKN akan menciptakan pusat ekonomi baru yang dapat menarik investasi dan membuka lapangan kerja baru bagi masyarakat lokal. Diharapkan dapat menjadi contoh "smart city" dan "green city" di Asia Tenggara, dengan penerapan teknologi canggih seperti Internet of Things (IoT) dan sistem transportasi otonom. Targetnya adalah meningkatkan pertumbuhan ekonomi di Kalimantan Timur dan sekitarnya hingga 7% per tahun, serta mengurangi ketimpangan antara wilayah barat dan timur Indonesia.',
+        },
+        {
+          judul: "Pendapat dan Tanggapan Publik",
+          deskripsi:
+            "Ada pendapat positif yang menyambut baik pemindahan IKN sebagai langkah progresif untuk pembangunan berkelanjutan dan pemerataan. Namun, kritik juga muncul dari berbagai kalangan, termasuk LSM dan aktivis lingkungan, yang khawatir dengan dampak ekologis dari pembangunan besar-besaran ini terhadap hutan Kalimantan. Survei Litbang Kompas (2022) menunjukkan bahwa lebih dari 50% masyarakat belum yakin bahwa pemindahan ibu kota akan efektif dan membawa manfaat nyata.",
+        },
+        {
+          judul: "Tantangan dan Kritik",
+          deskripsi:
+            "Tantangan utama yang dihadapi adalah pembiayaan. Meskipun ada komitmen dari pemerintah dan sektor swasta, ada kekhawatiran tentang bagaimana pendanaan ini akan dipenuhi tanpa membebani APBN. Ada juga tantangan dari segi kesiapan infrastruktur dan ketersediaan layanan publik seperti kesehatan, pendidikan, dan transportasi. Kritik lainnya termasuk isu transparansi dalam pengadaan lahan, potensi penggusuran masyarakat adat, dan ketidakpastian tentang dampak sosial-ekonomi terhadap penduduk lokal.",
+        },
+      ],
+    },
+    {
+      _id: "66d2cf2be273b9e4470d941f",
+      judul: "Hilirisasi",
+      sumber: "Sin Po TV",
+      tanggal: "20 Desember 2023",
+      gambar:
+        "group w-full cursor-pointer overflow-hidden relative card h-[27rem] rounded-md shadow-xl mx-auto flex flex-col justify-end p-4 border border-transparent dark:border-neutral-800 bg-[url(https://cdn.visiteliti.com/article/2021-12/28/POLJoU9HQYgkkesuTJU7_1640662510.jpeg)] bg-cover before:bg-[url(/gif/hilirisasi.gif)] before:fixed before:inset-0 before:opacity-0 before:z-[-1] hover:bg-[url(/gif/hilirisasi.gif)] hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:bg-black hover:after:opacity-50 transition-all duration-500",
+      gif: "hilirisasi.gif",
+      konten: [
+        {
+          judul: "Pernyataan Janji",
+          deskripsi:
+            'Prabowo Subianto menyampaikan komitmen untuk melanjutkan kebijakan hilirisasi seperti yang dilakukan oleh Presiden Joko Widodo. Menurut Prabowo, komitmen serupa juga diusung oleh pendampingnya, Gibran Rakabuming, serta Koalisi Indonesia Maju (KIM). Tekad itu disampaikan di hadapan puluhan ribu masyarakat Sulawesi Utara yang memenuhi Lapangan Schwarz, Langowan pada Senin (5/2). "Pak Jokowi pernah mengatakan pada saya \'Mas Bowo, tidak mungkin Indonesia makmur kalau kita jual bahan-bahan kita ke luar negeri\'. Untuk itu, saya, Prabowo-Gibran dengan Koalisi Indonesia Maju, kami bertekad untuk menjaga kekayaan Indonesia," kata Prabowo. Prabowo mengungkapkan, Indonesia adalah negeri yang sangat kaya. Beragam kekayaan itu sudah semestinya dinikmati oleh rakyat Indonesia sendiri, dan bukan sebaliknya. "Di setiap kesempatan dan provinsi yang saya datangi, saya selalu mengatakan bahwa negara kita terbukti negara yang sangat kaya. Tapi, sudah lama sekali kekayaan kita banyak diambil dan dibawa ke luar negeri, serta tidak dinikmati seluruh rakyat Indonesia," paparnya. Hilirisasi ditegaskan penting dilakukan Indonesia, karena dapat meningkatkan nilai tambah dari produk atau sumber daya alam yang dimiliki. Sebelumnya, Jokowi telah mengambil langkah kebijakan hilirisasi yang menghentikan penjualan kekayaan alam Indonesia dalam bentuk mentah dan dengan harga murah ke luar negeri. Prabowo mengatakan, hilirisasi menjadi jalan agar kekayaan Indonesia memiliki nilai tambah yang akan berdampak pada kesejahteraan rakyat. "Kami ingin mengelola (kekayaan Indonesia). Kami ingin mengurus, kami ingin mengatur kakayaan itu supaya nilai tambahnya bisa dinikmati seluruh rakyat Indonesia," kata Prabowo.',
+        },
+        {
+          judul: "Latar Belakang dan Konteks",
+          deskripsi:
+            "Hilirisasi telah menjadi fokus utama pemerintah dalam beberapa tahun terakhir untuk mengurangi ketergantungan pada ekspor bahan mentah. Dengan pemrosesan di dalam negeri, pemerintah berharap dapat meningkatkan pendapatan nasional dan menciptakan lapangan kerja yang lebih berkualitas. Indonesia, sebagai salah satu penghasil nikel terbesar di dunia, telah menerapkan larangan ekspor bijih mentah untuk mendorong investasi di sektor pengolahan. Langkah ini juga bertujuan untuk meningkatkan daya saing global dan mengurangi defisit perdagangan.",
+        },
+        {
+          judul: "Rencana Implementasi",
+          deskripsi:
+            "Rencana implementasi hilirisasi industri melibatkan pembangunan smelter, pabrik pengolahan, dan infrastruktur pendukung lainnya di beberapa wilayah strategis seperti Sulawesi dan Kalimantan. Pemerintah akan memberikan insentif pajak dan fasilitas lainnya bagi investor yang bersedia membangun fasilitas pengolahan di Indonesia. Selain itu, terdapat fokus pada pengembangan sumber daya manusia melalui pendidikan dan pelatihan yang ditargetkan pada industri hilir. Pemerintah juga mengupayakan kerjasama dengan berbagai negara untuk alih teknologi dan pendanaan.",
+        },
+        {
+          judul: "Perkembangan Terkini",
+          deskripsi:
+            "Hingga 2024, beberapa proyek hilirisasi utama seperti smelter nikel dan bauksit telah mulai beroperasi. Beberapa perusahaan internasional, seperti Tesla dan LG, telah menunjukkan minat untuk berinvestasi dalam rantai pasokan baterai kendaraan listrik di Indonesia. Kementerian Perindustrian melaporkan bahwa lebih dari 10 smelter baru diproyeksikan akan selesai dalam dua tahun ke depan, yang akan meningkatkan kapasitas pengolahan mineral dalam negeri secara signifikan.",
+        },
+        {
+          judul: "Dampak yang Diharapkan",
+          deskripsi:
+            "Program hilirisasi diharapkan dapat meningkatkan nilai ekspor Indonesia hingga tiga kali lipat dalam beberapa tahun mendatang dan menciptakan ribuan lapangan pekerjaan baru di sektor industri dan manufaktur. Selain itu, hilirisasi juga diharapkan dapat mengurangi defisit perdagangan dan meningkatkan keseimbangan neraca pembayaran. Hilirisasi juga diyakini akan memperkuat daya saing Indonesia dalam rantai pasokan global, khususnya dalam industri kendaraan listrik dan energi terbarukan.",
+        },
+        {
+          judul: "Pendapat dan Tanggapan Publik",
+          deskripsi:
+            "Banyak pihak mendukung hilirisasi karena dianggap sebagai langkah maju dalam pembangunan ekonomi yang berkelanjutan. Namun, ada juga kritik terkait kesiapan infrastruktur dan kualitas tenaga kerja di Indonesia untuk mendukung hilirisasi yang lebih luas. Beberapa ekonom memperingatkan bahwa terlalu mengandalkan investasi asing dapat meningkatkan risiko ekonomi jika tidak ada jaminan nilai tambah lokal yang cukup.",
+        },
+        {
+          judul: "Tantangan dan Kritik",
+          deskripsi:
+            "Tantangan utama hilirisasi adalah ketergantungan pada investasi asing dan risiko lingkungan yang mungkin muncul akibat pembangunan smelter dan fasilitas pengolahan lainnya. Ada juga kekhawatiran tentang kurangnya regulasi ketat dalam hal lingkungan dan perlindungan tenaga kerja. Beberapa LSM dan aktivis lingkungan telah menyerukan perlunya studi dampak lingkungan yang lebih komprehensif sebelum melanjutkan proyek-proyek besar ini.",
+        },
+      ],
+    },
+    {
+      _id: "66d2cf2be273b9e4470d9420",
+      judul: "Makan Siang Gratis Di Sekolah",
+      sumber: "tvOne News",
+      tanggal: "24 Mei 2024",
+      gambar:
+        "group w-full cursor-pointer overflow-hidden relative card h-[27rem] rounded-md shadow-xl mx-auto flex flex-col justify-end p-4 border border-transparent dark:border-neutral-800 bg-[url(https://assets.ladiestory.id/gallery/16582055731130052815-makan-siang.jpg)] bg-cover before:bg-[url(/gif/makan-siang-gratis.gif)] before:fixed before:inset-0 before:opacity-0 before:z-[-1] hover:bg-[url(/gif/makan-siang-gratis.gif)] hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:bg-black hover:after:opacity-50 transition-all duration-500",
+      gif: "makan-siang-gratis.gif",
+      konten: [
+        {
+          judul: "Pernyataan Janji",
+          deskripsi:
+            'Prabowo Subianto menjanjikan bakal beri makan siang gratis untuk siswa sekolah, termasuk ibu hamil sebagai langkah pengentasan stunting. "Strategi kita adalah memberikan makan siang kepada seluruh anak Indonesia termasuk mereka masih dalam kandungan ibunya. Ibu hamil kita tunjang dan ini adalah strategi jangka panjang menghilangkan stunting menghilangkan dan mengurangi beban rakyat miskin" kata Prabowo dalam acara Sarasehan 100 Ekonom 2023 yang digelar INDEF bersama CNBC Indonesia, Rabu (8/11/2023). Ia menjelaskan bahwa program makan gratis untuk anak harus memperhitungkan kemampuan anggaran pemerintah. "Kita hitung kapasitas sekarang baru kasih satu kali makan, ada snack-nya, ada susu. ini sebuah prestasi menurut saya." tutur Prabowo. Prabowo menjelaskan program makan siang gratis bagi seluruh pelajar dan ibu hamil diperkirakan membutuhkan anggaran hingga Rp 400 triliun. Prabowo Subianto menjanjikan bakal beri makan siang gratis untuk siswa sekolah, termasuk ibu hamil sebagai langkah pengentasan stunting. "Strategi kita adalah memberikan makan siang kepada seluruh anak Indonesia termasuk mereka masih dalam kandungan ibunya. Ibu hamil kita tunjang dan ini adalah strategi jangka panjang menghilangkan stunting menghilangkan dan mengurangi beban rakyat miskin" kata Prabowo dalam acara Sarasehan 100 Ekonom 2023 yang digelar INDEF bersama CNBC Indonesia, Rabu (8/11/2023). Ia menjelaskan bahwa program makan gratis untuk anak harus memperhitungkan kemampuan anggaran pemerintah. "Kita hitung kapasitas sekarang baru kasih satu kali makan, ada snack-nya, ada susu. ini sebuah prestasi menurut saya." tutur Prabowo. Prabowo menjelaskan program makan siang gratis bagi seluruh pelajar dan ibu hamil diperkirakan membutuhkan anggaran hingga Rp 400 triliun.',
+        },
+        {
+          judul: "Latar Belakang dan Konteks",
+          deskripsi:
+            "Indonesia masih menghadapi masalah malnutrisi dan stunting di kalangan anak-anak. Berdasarkan data Kementerian Kesehatan, sekitar 27,7% anak di bawah usia lima tahun mengalami stunting pada tahun 2023. Program makan siang gratis diharapkan dapat membantu mengurangi angka stunting dan meningkatkan kualitas hidup anak-anak, khususnya di daerah-daerah terpencil dan kurang mampu.",
+        },
+        {
+          judul: "Rencana Implementasi",
+          deskripsi:
+            "Program ini akan dimulai dengan sekolah-sekolah di daerah miskin dan terpencil pada tahun pertama, kemudian diperluas ke seluruh negeri. Pemerintah akan bekerjasama dengan kementerian terkait, pemerintah daerah, dan swasta untuk pengadaan dan distribusi makanan. Akan ada sistem pemantauan untuk memastikan bahwa makanan yang disediakan memenuhi standar gizi dan kebersihan yang ketat. Pemerintah juga berencana untuk mengintegrasikan program ini dengan program kesehatan lainnya, seperti pemeriksaan kesehatan rutin di sekolah.",
+        },
+        {
+          judul: "Perkembangan Terkini",
+          deskripsi:
+            "Pada 2024, beberapa pilot project program makan siang gratis telah dilaksanakan di beberapa provinsi, termasuk Nusa Tenggara Timur dan Papua. Hasil awal menunjukkan peningkatan signifikan dalam kehadiran siswa dan penurunan tingkat kekurangan gizi di daerah-daerah tersebut. Pemerintah terus melakukan evaluasi dan perbaikan untuk memastikan program berjalan lancar dan efektif.",
+        },
+        {
+          judul: "Dampak yang Diharapkan",
+          deskripsi:
+            "Program ini diharapkan dapat mengurangi angka malnutrisi dan stunting di kalangan anak-anak sekolah dasar hingga 15% dalam lima tahun pertama. Selain itu, peningkatan gizi yang lebih baik diharapkan dapat meningkatkan prestasi akademik dan kesehatan secara keseluruhan. Dengan demikian, diharapkan dapat memberikan dampak jangka panjang pada produktivitas dan kesejahteraan generasi muda Indonesia.",
+        },
+        {
+          judul: "Pendapat dan Tanggapan Publik",
+          deskripsi:
+            "Sebagian besar masyarakat dan organisasi kesehatan menyambut baik inisiatif ini sebagai langkah progresif untuk kesehatan publik. Namun, ada kritik mengenai biaya dan keberlanjutan program, terutama terkait anggaran pemerintah yang terbatas. Beberapa ahli juga mengingatkan agar program ini tidak mengabaikan aspek pendidikan dan pemberdayaan gizi bagi orang tua dan komunitas.",
+        },
+        {
+          judul: "Tantangan dan Kritik",
+          deskripsi:
+            "Tantangan terbesar adalah masalah logistik dan pendanaan. Memastikan distribusi makanan yang merata dan tepat waktu di seluruh pelosok Indonesia adalah tugas yang berat. Ada juga kekhawatiran tentang potensi korupsi dan penyalahgunaan dana. Kritikus juga menyoroti perlunya pendekatan holistik, yang mencakup pendidikan gizi untuk keluarga dan masyarakat, bukan hanya sekedar pemberian makanan.",
+        },
+      ],
+    },
+  ];
+
+  const janjiPresiden = [
+    {
+      _id: "66d18caa541db2e61b7c9cd2",
+      title: "Program Gizi dan Kesehatan Anak",
+      description:
+        "Memberi makan siang dan susu gratis di sekolah dan pesantren, serta bantuan gizi untuk anak balita dan ibu hamil.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cd3",
+      title: "Pelayanan Kesehatan Gratis",
+      description:
+        "Menyelenggarakan pemeriksaan kesehatan gratis, menuntaskan kasus TBC, dan membangun Rumah Sakit lengkap berkualitas di kabupaten.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cd4",
+      title: "Pengembangan Pertanian dan Pangan",
+      description:
+        "Mencetak dan meningkatkan produktivitas lahan pertanian dengan lumbung pangan desa, daerah, dan nasional.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cd5",
+      title: "Pendidikan dan Renovasi Sekolah",
+      description:
+        "Membangun sekolah-sekolah unggul terintegrasi di setiap kabupaten, dan memperbaiki sekolah-sekolah yang perlu renovasi.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cd6",
+      title: "Program Kesejahteraan Sosial",
+      description:
+        "Melanjutkan dan menambahkan program kartu-kartu kesejahteraan sosial serta kartu usaha untuk menghilangkan kemiskinan absolut.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cd7",
+      title: "Infrastruktur Desa dan BLT",
+      description:
+        "Melanjutkan pembangunan infrastruktur desa dan kelurahan, Bantuan Langsung Tunai (BLT).",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cd8",
+      title: "Penerimaan Negara dan PDB",
+      description:
+        "Mendirikan Badan Penerimaan Negara dan meningkatkan rasio penerimaan negara terhadap produk domestik bruto (PDB) ke 23%.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cd9",
+      title: "Kesejahteraan ASN dan Aparatur Negara",
+      description:
+        "Menaikkan gaji ASN (terutama guru, dosen, tenaga kesehatan, dan penyuluh), TNI/POLRI, dan pejabat negara.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cda",
+      title: "Pendidikan Kedokteran dan Beasiswa",
+      description:
+        "Membangun 300 Fakultas Kedokteran dan Beasiswa 10 Ribu Pelajar.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cdb",
+      title: "Pertumbuhan Ekonomi Nasional",
+      description: "Pertumbuhan Ekonomi Menembus 8 Persen.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cdc",
+      title: "Pelestarian Budaya Kalimantan",
+      description: "Memenuhi hak dan menjaga warisan budaya Kalimantan.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cdd",
+      title: "Kredit Usaha untuk Anak Muda",
+      description:
+        "Kredit usaha bisnis rintisan bagi para anak muda yang mudah diakses.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cde",
+      title: "Penyediaan Rumah Murah",
+      description:
+        "Menjamin penyediakan rumah murah bersanitasi baik untuk yang membutuhkan, terutama generasi milenial, generasi Z, dan masyarakat berpenghasilan rendah (MBR).",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9cdf",
+      title: "Penanganan Banjir di Jakarta",
+      description:
+        "Memprioritaskan penanganan banjir di pemukiman padat dengan cara berkoordinasi dengan Gubernur DK Jakarta.",
+    },
+    {
+      _id: "66d18caa541db2e61b7c9ce0",
+      title: "Pengelolaan Kekayaan Alam Indonesia",
+      description:
+        "Melakukan pengelolaan kekayaan alam Indonesia untuk kesejahteraan rakyat.",
+    },
+  ];
 
   return (
     <main>
@@ -108,11 +298,11 @@ export default function Home(props: {
       </HeroHighlight>
       <div className="pt-16 bg-zinc-50">
         <div
-          className="flex relative flex-col font-lora text-justify px-48 pb-20 pt-40 bg-cover bg-no-repeat bg-center after:content-[''] after:absolute after:top-0 after:h-40 after:bg-gradient-to-b after:right-0 after:left-0 after:from-white after:to-transparent"
-          style={{ backgroundImage: "url(/banner.png)" }}
+          className="flex relative flex-col font-lora text-justify px-48 pb-20 pt-40 bg-cover bg-no-repeat bg-center after:content-[''] after:absolute after:top-0 after:h-72 after:bg-gradient-to-b after:right-0 after:left-0 after:from-white after:to-transparent before:content-[''] before:absolute before:bottom-0 before:top-0 before:opacity-50 before:bg-white before:right-0 before:left-0"
+          style={{ backgroundImage: "url(/banner.jpeg)" }}
         >
           <h1
-            className="font-bold text-3xl"
+            className="font-bold text-3xl z-20"
             data-aos="fade-in"
             aos-duration="100"
             aos-delay="0"
@@ -120,7 +310,7 @@ export default function Home(props: {
             Janji Politik, Berita Bohong, dan Politik Penyangkalan
           </h1>
           <p
-            className="mt-7"
+            className="mt-7 z-20"
             data-aos="fade-in"
             aos-duration="100"
             aos-delay="100"
@@ -158,7 +348,7 @@ export default function Home(props: {
               https://i.pinimg.com/564x/7f/89/c2/7f89c2381dd66402686f13021c974aad.jpg
             </a>
           </p>
-          <div>
+          <div className="z-20">
             <p className="my-3" style={{ textShadow: "1px 1px 1px #ccc" }}>
               Dalam hasil penelitian Centre for Strategic and International
               Studies (CSIS), Fernandes (2023) menyebutkan bahwa debat
@@ -213,7 +403,7 @@ export default function Home(props: {
                 <TextReveal
                   link={item.judul}
                   className="font-lora"
-                  text={item.konten[0].deskripsi.substring(0, 800)}
+                  text={item.konten[0].deskripsi.substring(0, 900)}
                 />
               </div>
             ))}
@@ -238,7 +428,7 @@ export default function Home(props: {
               <LinkPreview
                 imageSrc="/gif/pembangunan-ikn.gif"
                 isStatic={true}
-                url="https://tailwindcss.com"
+                url="/janji-prabowo-gibran/melanjutkan-pembangunan-ikn"
                 className="font-bold"
               >
                 Ibu Kota Negara (IKN) Nusantara
@@ -247,7 +437,7 @@ export default function Home(props: {
               <LinkPreview
                 imageSrc="/gif/hilirisasi.gif"
                 isStatic={true}
-                url="https://tailwindcss.com"
+                url="/janji-prabowo-gibran/hilirisasi"
                 className="font-bold"
               >
                 hilirisasi
@@ -257,7 +447,7 @@ export default function Home(props: {
               <LinkPreview
                 imageSrc="/gif/makan-siang-gratis.gif"
                 isStatic={true}
-                url="https://tailwindcss.com"
+                url="/janji-prabowo-gibran/makan-siang-gratis-di-sekolah"
                 className="font-bold"
               >
                 makan siang gratis

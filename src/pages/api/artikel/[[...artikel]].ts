@@ -10,7 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.query.artikel) {
       artikel = await db
         .collection("Artikel")
-        .findOne({ _id: new ObjectId(String(req.query.artikel)) });
+        .findOne({ judul: String(req.query.artikel).replace(/-/g, " ") });
     } else {
       artikel = await db.collection("Artikel").find({}).toArray();
     }

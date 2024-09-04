@@ -22,7 +22,6 @@ export const getServerSideProps: GetServerSideProps<
   ConnectionStatus
 > = async () => {
   try {
-    await client.connect(); // `await client.connect()` will use the default database passed in the MONGODB_URI
     const data1 = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/janji-presiden`
     ).then((res) => res.json());

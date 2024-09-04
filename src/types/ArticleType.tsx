@@ -1,16 +1,15 @@
 export type ArticleType = {
-  _id: string;
   penulis: string;
   tanggal: string;
   judul: string;
-  "paragraf_1.1": string;
-  "paragraf_1.2": string;
-  "paragraf_2.1": string;
-  "paragraf_2.2": string;
+  "paragraf_1_1": string;
+  "paragraf_1_2": string;
+  "paragraf_2_1": string;
+  "paragraf_2_2": string;
   subjudul: string;
-  "paragraf_3.1": string;
-  "paragraf_3.2": string;
-  "paragraf_3.3": string;
+  "paragraf_3_1": string;
+  "paragraf_3_2": string;
+  "paragraf_3_3": string;
   kutipan_1: string;
   kutipan_2: string;
   kategori: string;
@@ -20,6 +19,6 @@ export type ArticleType = {
   waktu_publikasi: string;
   referensi: string[];
   lama_baca: string;
-  jumlah_kata: string;
+  jumlah_kata: number;
   bahasa: string;
 };

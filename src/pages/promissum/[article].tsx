@@ -52,8 +52,8 @@ export default function ArticlePage(props: { dataArtikel: ArticleType }) {
         </div>
         <div className="basis-1/2 font-lora pr-10 pt-10 pl-5">
           <div className="flex flex-col gap-6">
-            <p>{dataArtikel["paragraf_1.1"]}</p>
-            <p>{dataArtikel["paragraf_1.2"]}</p>
+            <p>{dataArtikel["paragraf_1_1"]}</p>
+            <p>{dataArtikel["paragraf_1_2"]}</p>
           </div>
           <Image
             className="mt-24 w-3/4"
@@ -73,8 +73,8 @@ export default function ArticlePage(props: { dataArtikel: ArticleType }) {
             <span className="-tracking-[5px]">———</span>
           </h1>
           <div className="self-center p-20 font-lora text-sm font-light flex flex-col gap-16">
-            <p>{dataArtikel["paragraf_2.1"]}</p>
-            <p>{dataArtikel["paragraf_2.2"]}</p>
+            <p>{dataArtikel["paragraf_2_1"]}</p>
+            <p>{dataArtikel["paragraf_2_2"]}</p>
           </div>
         </div>
         <div className="basis-1/2 font-lora pr-10 py-20 pl-5">
@@ -94,7 +94,7 @@ export default function ArticlePage(props: { dataArtikel: ArticleType }) {
             {dataArtikel.subjudul}
             <span className="-tracking-[5px]">———</span>
           </h1>
-          <p className="font-lora text-3xl">{dataArtikel["paragraf_3.1"]}</p>
+          <p className="font-lora text-3xl">{dataArtikel["paragraf_3_1"]}</p>
         </div>
         <div className="flex flex-row p-6 pr-44 gap-16">
           <Image
@@ -107,8 +107,8 @@ export default function ArticlePage(props: { dataArtikel: ArticleType }) {
             height={1000}
           />
           <div className="font-lora text-sm w-1/2 flex flex-col gap-4">
-            <p className="">{dataArtikel["paragraf_3.2"]}</p>
-            <p className="">{dataArtikel["paragraf_3.3"]}</p>
+            <p className="">{dataArtikel["paragraf_3_2"]}</p>
+            <p className="">{dataArtikel["paragraf_3_3"]}</p>
           </div>
         </div>
       </div>

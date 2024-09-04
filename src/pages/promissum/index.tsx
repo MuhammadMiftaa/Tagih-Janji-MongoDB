@@ -92,7 +92,7 @@ export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
       <Highlight className="font-lora text-6xl font-light mt-5 italic inline-block from-red to-white text-white from-50%">
         Dari Ucapan ke Kenyataan.
       </Highlight>
-      <div className="mt-20 py-10 flex flex-col gap-7 relative">
+      <div className="mt-20 py-10 flex flex-col-reverse gap-7 relative">
         {dataArtikel.map((artikel) => {
           const date = new Date(artikel.tanggal);
           const options: Intl.DateTimeFormatOptions = {
@@ -102,20 +102,20 @@ export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
           };
           const formattedDate = date.toLocaleDateString("en-US", options);
           return (
-            <div key={artikel._id}>
-              <div className="flex w-full gap-10 group">
+            <div key={artikel.judul}>
+              <div className="flex w-full gap-10 group mb-5">
                 <h1 className="font-lora text-zinc-500 text-xs basis-1/5 ">
                   {formattedDate}
                 </h1>
                 <Link
-                  href={"/promissum/" + artikel._id}
+                  href={"/promissum/" + artikel.judul.replace(/\s/g, "-")}
                   className="basis-4/5 flex flex-col gap-3 -mt-2 group"
                 >
                   <p className="font-lora text-2xl line-clamp-2 h-fit group-hover:underline group-hover:cursor-pointer">
                     {artikel.judul}
                   </p>
                   <p className="font-lora text-zinc-500 text-sm line-clamp-4">
-                    {artikel["paragraf_1.1"] + " " + artikel["paragraf_1.2"]}
+                    {artikel["paragraf_1_1"] + " " + artikel["paragraf_1_2"]}
                   </p>
                   <p className="font-lora uppercase text-zinc-700 text-sm line-clamp-1">
                     {artikel.penulis}

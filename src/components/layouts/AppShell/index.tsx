@@ -5,6 +5,7 @@ import { FloatingNav } from "@/src/components/ui/floating-navbar";
 import Link from "next/link";
 import { HiOutlineArrowUp } from "react-icons/hi";
 import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -52,6 +53,7 @@ export default function AppShell(props: AppShellProps) {
   }, []);
 
   const { query } = useRouter();
+  const pathname = usePathname()
 
   return (
     <div>
@@ -62,7 +64,7 @@ export default function AppShell(props: AppShellProps) {
         navItems={navItems}
       />
       {children}
-      {isVisible && (
+      {isVisible && pathname!='/promissum' && (
         <Link
           href="#navbar"
           className="bg-black text-yellow rounded-full border border-zinc-600 p-3 text-xl fixed bottom-5 right-5 cursor-pointer"

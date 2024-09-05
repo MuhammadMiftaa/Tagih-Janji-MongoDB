@@ -2,6 +2,7 @@ import { TracingBeam } from "@/src/components/ui/tracing-beam";
 import client from "@/src/lib/mongodb";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import React from "react";
 import { twMerge } from "tailwind-merge";
@@ -49,6 +50,9 @@ export default function JanjiPrabowoGibranPage(props: {
     }[];
   }, isConnected: ConnectionStatus
 }) {  
+
+  const pathname = usePathname()
+  const {query} = useRouter()
 
   return (
     <div className="relative w-full bg-slate-50 pt-20">

@@ -210,12 +210,12 @@ export default function Home(props: {
             pasangan capres-cawapres tersebut.
           </p>
           <div className="px-48 py-8">
-            {janji.map((item) => (
+            {janji.map((item, i) => (
               <div className="my-20" key={item._id}>
                 <h1 className="font-lora my-6 text-4xl font-semibold">
                   {item.judul}
                 </h1>
-                <div className={item.gambar}>
+                <div className={classGambar[i]}>
                   <div className="text relative z-50 font-lora group-hover:bottom-0 -bottom-28 duration-500">
                     <h1
                       className="font-bold text-xl md:text-3xl text-gray-50 relative"
@@ -292,3 +292,9 @@ export default function Home(props: {
     </main>
   );
 }
+
+const classGambar = [
+  "group w-full cursor-pointer overflow-hidden relative card h-[27rem] rounded-md shadow-xl mx-auto flex flex-col justify-end p-4 border border-transparent dark:border-neutral-800 bg-[url(https://hypeabis.id/assets/content/20230425154852000000istanaNyoman.jpg)] bg-cover before:bg-[url(/gif/pembangunan-ikn.gif)] before:fixed before:inset-0 before:opacity-0 before:z-[-1] hover:bg-[url(/gif/pembangunan-ikn.gif)] hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:bg-black hover:after:opacity-50 transition-all duration-500",
+  "group w-full cursor-pointer overflow-hidden relative card h-[27rem] rounded-md shadow-xl mx-auto flex flex-col justify-end p-4 border border-transparent dark:border-neutral-800 bg-[url(https://cdn.visiteliti.com/article/2021-12/28/POLJoU9HQYgkkesuTJU7_1640662510.jpeg)] bg-cover before:bg-[url(/gif/hilirisasi.gif)] before:fixed before:inset-0 before:opacity-0 before:z-[-1] hover:bg-[url(/gif/hilirisasi.gif)] hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:bg-black hover:after:opacity-50 transition-all duration-500",
+  "group w-full cursor-pointer overflow-hidden relative card h-[27rem] rounded-md shadow-xl mx-auto flex flex-col justify-end p-4 border border-transparent dark:border-neutral-800 bg-[url(https://assets.ladiestory.id/gallery/16582055731130052815-makan-siang.jpg)] bg-cover before:bg-[url(/gif/makan-siang-gratis.gif)] before:fixed before:inset-0 before:opacity-0 before:z-[-1] hover:bg-[url(/gif/makan-siang-gratis.gif)] hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:bg-black hover:after:opacity-50 transition-all duration-500",
+];

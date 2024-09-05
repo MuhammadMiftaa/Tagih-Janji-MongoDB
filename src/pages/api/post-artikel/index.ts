@@ -4,6 +4,7 @@ import dbConnect from "@/src/lib/mongoose";
 import { ArticleType } from "@/src/types/ArticleType";
 import client from "@/src/lib/mongodb";
 import readingTime from "reading-time";
+import { franc } from "franc";
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,6 +21,27 @@ export default async function handler(
       const db = mongo.db("MainData");
       const Form: ArticleType = req.body;
 
+      if (
+        !Form.judul &&
+        !Form.paragraf_1_1 &&
+        !Form.paragraf_1_2 &&
+        !Form.paragraf_2_1 &&
+        !Form.paragraf_2_2 &&
+        !Form.subjudul &&
+        !Form.paragraf_3_1 &&
+        !Form.paragraf_3_2 &&
+        !Form.paragraf_3_3 &&
+        !Form.kutipan_1 &&
+        !Form.kutipan_2
+      ) {
+        return res.status(400).json({
+          status: false,
+          statusCode: 400,
+          message: "Bad Request",
+          error: "Please fill the form",
+        });
+      }
+
       const date = new Date();
       const teks =
         Form.judul +
@@ -33,7 +55,7 @@ export default async function handler(
         Form.paragraf_3_3 +
         Form.kutipan_1 +
         Form.kutipan_2;
-      Form.bahasa ??= "id";
+      Form.bahasa = franc(teks);
       Form.jumlah_kata = teks.trim().split(/\s+/).length;
       Form.lama_baca = readingTime(teks).text;
 
@@ -42,6 +64,7 @@ export default async function handler(
         tanggal: date.toLocaleDateString(),
         waktu_publikasi: date.toLocaleTimeString(),
       };
+
       const result = await db.collection("Artikel").insertOne(ArtikelPost);
 
       res.status(201).json({

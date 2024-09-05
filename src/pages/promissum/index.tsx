@@ -39,51 +39,6 @@ export const getServerSideProps: GetServerSideProps<
 export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
   const { dataArtikel } = props;
 
-  const people = [
-    {
-      id: 1,
-      name: "John Doe",
-      designation: "Software Engineer",
-      image:
-        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80",
-    },
-    {
-      id: 2,
-      name: "Robert Johnson",
-      designation: "Product Manager",
-      image:
-        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      id: 3,
-      name: "Jane Smith",
-      designation: "Data Scientist",
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      id: 4,
-      name: "Emily Davis",
-      designation: "UX Designer",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      id: 5,
-      name: "Tyler Durden",
-      designation: "Soap Developer",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3540&q=80",
-    },
-    {
-      id: 6,
-      name: "Dora",
-      designation: "The Explorer",
-      image:
-        "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3534&q=80",
-    },
-  ];
-
   return (
     <div className="pt-40 pb-20 px-48 relative">
       <h1 className="font-lora text-6xl font-light mb-5 block">
@@ -94,7 +49,9 @@ export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
       </Highlight>
       <div className="mt-20 py-10 flex flex-col-reverse gap-7 relative">
         {dataArtikel.map((artikel) => {
-          const date = new Date(artikel.tanggal);
+          const [day, month, year] = artikel.tanggal.split("/").map(Number);
+
+          const date = new Date(year, month - 1, day);
           const options: Intl.DateTimeFormatOptions = {
             year: "numeric",
             month: "long",
@@ -137,8 +94,8 @@ export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
         })}
       </div>
       {/* <AnimatedTooltip item={{id: 1, name: "Tulis Artikel", designation: "disini"}} /> */}
-      <Link href={"/promissum/exigere"} className="flex flex-row items-center justify-center mb-10 w-fit fixed bottom-10 right-1/2 -translate-x-[50%]">
-        <AnimatedTooltip item={{id: 1, name: "Tulis Artikel", designation: "disini", image: "https://www.svgrepo.com/show/6755/edit.svg"}} />
+      <Link href={"/promissum/exigere"} className="flex flex-row items-center justify-center fixed bottom-7 right-7">
+        <AnimatedTooltip item={{id: 1, name: "Mulai Menulis", designation: "Klik disini", image: "/write.png"}} />
       </Link>
     </div>
   );

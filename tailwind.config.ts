@@ -74,11 +74,20 @@ const config = {
             backgroundPosition: "-200% 0",
           },
         },
+        "color-change": {
+          from: {
+            background: "linear-gradient(to bottom, #f8fafc, #d1d5db)",
+          },
+          to: {
+            background: "linear-gradient(to bottom, #d1d5db, #f8fafc)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         shimmer: "shimmer 2s linear infinite",
+        "color-change": "color-change 2s linear infinite",
       },
     },
   },

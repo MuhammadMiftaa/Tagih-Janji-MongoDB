@@ -7,10 +7,10 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { GoPlus } from "react-icons/go";
 
 const postFormSchema = z.object({
   penulis: z.string(),
-  tanggal: z.string(),
   lokasi: z.string(),
   judul: z
     .string()
@@ -105,18 +105,26 @@ type PostFormSchema = z.infer<typeof postFormSchema>;
 export default function ExigerePage() {
   const { push } = useRouter();
 
+  const [tags, setTags] = useState<string[]>([]);
+  const [references, setReferences] = useState<string[]>([]);
+  const addTag = () => setTags([...tags, ""]);
+  const addReferences = () => setReferences([...references, ""]);
+
   const { register, handleSubmit, formState } = useForm<PostFormSchema>({
-    // resolver: zodResolver(postFormSchema),
+    resolver: zodResolver(postFormSchema),
   });
 
   const onSubmit = handleSubmit(async (values) => {
     const result = await fetch("/api/post-artikel", {
       method: "POST",
-      body: JSON.stringify(values),
+      body: JSON.stringify({ ...values, tags, referensi: references }),
       headers: {
         "Content-Type": "application/json",
       },
     });
+
+    setTags([]);
+    setReferences([]);
 
     if (result.status === 201) {
       push("/promissum");
@@ -128,7 +136,7 @@ export default function ExigerePage() {
   return (
     <div
       className="my-28 mx-10 bg-slate-50 border border-zinc-900"
-      style={{ boxShadow: "5px 5px 0 #000" }}
+      style={{ boxShadow: "15px -15px 0 #000" }}
     >
       <div className="flex flex-col w-fit mx-auto py-5 items-center">
         <h1 className="text-5xl uppercase font-lora">Tagih Janji</h1>
@@ -397,7 +405,62 @@ export default function ExigerePage() {
             </p>
           )}
         </LabelInputContainer>
-
+        <LabelInputContainer className="mb-4 w-fit">
+          <Label className="-mb-1 text-lg" htmlFor="kutipan_2">
+            References
+          </Label>
+          <div className="flex items-center gap-4 flex-wrap">
+            {references &&
+              references.map((ref, index) => (
+                <Input
+                  key={index}
+                  className="w-40"
+                  id={`ref-${index}`}
+                  onChange={(e) => {
+                    const updatedReferences = [...references];
+                    updatedReferences[index] = e.target.value;
+                    setReferences(updatedReferences);
+                  }}
+                />
+              ))}
+            {references.length < 12 && (
+              <div
+                onClick={addReferences}
+                className="p-1 w-fit h-fit border border-zinc-700 rounded-full cursor-pointer group hover:border-zinc-300 duration-300"
+              >
+                <GoPlus className="group-hover:text-zinc-300 duration-300" />
+              </div>
+            )}
+          </div>
+        </LabelInputContainer>
+        <LabelInputContainer className="mb-4 w-fit">
+          <Label className="-mb-1 text-lg" htmlFor="kutipan_2">
+            Tags
+          </Label>
+          <div className="flex items-center gap-4 flex-wrap">
+            {tags &&
+              tags.map((tag, index) => (
+                <Input
+                  key={index}
+                  className="w-40"
+                  id={`tag-${index}`}
+                  onChange={(e) => {
+                    const updatedTags = [...tags];
+                    updatedTags[index] = e.target.value;
+                    setTags(updatedTags);
+                  }}
+                />
+              ))}
+            {tags.length < 12 && (
+              <div
+                onClick={addTag}
+                className="p-1 w-fit h-fit border border-zinc-700 rounded-full cursor-pointer group hover:border-zinc-300 duration-300"
+              >
+                <GoPlus className="group-hover:text-zinc-300 duration-300" />
+              </div>
+            )}
+          </div>
+        </LabelInputContainer>
         <button
           type="submit"
           className="font-lora inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"

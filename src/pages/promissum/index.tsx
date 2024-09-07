@@ -44,7 +44,7 @@ export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
       <h1 className="font-lora text-6xl font-light mb-5 block">
         Tagih Janji Pejabat:{" "}
       </h1>
-      <Highlight className="font-lora text-6xl font-light mt-5 italic inline-block from-red to-white text-white from-50%">
+      <Highlight className="font-lora text-6xl font-light mt-5 italic inline-block from-cust-red to-white text-white from-50%">
         Dari Ucapan ke Kenyataan.
       </Highlight>
       <div className="mt-20 py-10 flex flex-col-reverse gap-7 relative">

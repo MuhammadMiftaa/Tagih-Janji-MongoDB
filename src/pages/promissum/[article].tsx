@@ -45,8 +45,8 @@ export default function ArticlePage(props: { dataArtikel: ArticleType }) {
     <div className="py-32">
       <header className="w-full flex flex-col font-lora px-10 text-sm">
         <div className="flex gap-2 flex-wrap mb-8">
-          {dataArtikel.tags.map((tag) => (
-            <h1 className="py-1 px-3 rounded-full w-fit bg-gradient-to-br from-zinc-600 to-zinc-950 text-white font-lora">{tag}</h1>
+          {dataArtikel.tags.map((tag, index) => (
+            <h1 key={index} className="py-1 px-3 rounded-full w-fit bg-gradient-to-br from-zinc-600 to-zinc-950 text-white font-lora">{tag}</h1>
           ))}
         </div>
         <div className="justify-between flex">

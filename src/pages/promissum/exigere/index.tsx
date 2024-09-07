@@ -461,9 +461,21 @@ export default function ExigerePage() {
             )}
           </div>
         </LabelInputContainer>
+        <LabelInputContainer className="mb-4">
+          <Label className="-mb-1 text-lg" htmlFor="kutipan_2">
+            Tags
+          </Label>
+          <Textarea
+            className="w-0"
+            id="kutipan_2"
+            placeholder="Janji 9 tahun itu dimuat di beberapa media massa. Namun, saat ini, menurut Tri Wahyu, janji Jokowi mencari dan menemukan Wiji Thukul ternyata palsu."
+            rows={5}
+            {...register("kutipan_2")}
+          />
+        </LabelInputContainer>
         <button
           type="submit"
-          className="font-lora inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+          className="font-lora inline-flex mt-6 h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
         >
           Unggah Sekarang
         </button>

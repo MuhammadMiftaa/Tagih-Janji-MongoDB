@@ -93,7 +93,7 @@ export default function Home(props: {
           className="relative flex flex-col gap-4 items-center justify-center px-4"
         >
           <div className="text-xl h-[] font-lora md:text-4xl font-bold dark:text-white text-center">
-            Tagih <span className="text-red">Janji</span>.
+            Tagih <span className="text-cust-red">Janji</span>.
           </div>
         </motion.div>
       </AuroraBackground>
@@ -116,7 +116,7 @@ export default function Home(props: {
         >
           Janji adalah utang, dan kami di sini untuk
           <br />
-          <Highlight className="text-white font-medium dark:text-white from-red from-50% to-white">
+          <Highlight className="text-white font-medium dark:text-white from-cust-red from-50% to-white">
             mengingatkan.
           </Highlight>
         </motion.h1>
@@ -199,7 +199,7 @@ export default function Home(props: {
             </p>
           </div>
         </div>
-        <div className="bg-yellow py-20">
+        <div className="bg-cust-yellow py-20">
           <TypingAnimation
             className="text-7xl px-48 text-left font-lora font-light text-black dark:text-white"
             text="Janji Presiden dan Wakil Presiden Terpilih."
@@ -236,7 +236,7 @@ export default function Home(props: {
           <div className=" py-20 w-full bg-zinc-950 font-lora">
             <h1 className="text-5xl my-5 text-center font-light text-white">
               Janji-janji lengkap dari{" "}
-              <Highlight className="text-black font-medium dark:text-white from-yellow to-zinc-950 from-50%">
+              <Highlight className="text-black font-medium dark:text-white from-cust-yellow to-zinc-950 from-50%">
                 Prabowo Gibran
               </Highlight>
             </h1>

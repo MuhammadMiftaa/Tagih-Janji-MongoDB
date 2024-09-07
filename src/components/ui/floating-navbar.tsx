@@ -65,7 +65,7 @@ export const FloatingNav = ({
         <h1 className="text-black w-full font-poppins italic font-light text-2xl">
           Tagih <span className="text-red">Janji</span>
         </h1>
-        <div className="justify-self-center flex gap-5 justify-center w-full">
+        <div className="justify-self-center flex gap-8 justify-center w-full">
           {navItems.map((navItem: any, idx: number) => (
             <Link
               key={`link=${idx}`}
@@ -75,6 +75,7 @@ export const FloatingNav = ({
               )}
             >
               <span className="block sm:hidden">{navItem.icon}</span>
+              <span>{navItem.icon}</span>
               <span className="hidden sm:block text-lg tracking-wide">
                 {navItem.name}
               </span>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { HiOutlineArrowUp } from "react-icons/hi";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
+import { SlLogin } from "react-icons/sl";
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -21,16 +22,16 @@ export default function AppShell(props: AppShellProps) {
       icon: <IconHome className="h-4 w-4 text-neutral-500 dark:text-white" />,
     },
     {
-      name: "About",
-      link: "/about",
-      icon: <IconUser className="h-4 w-4 text-neutral-500 dark:text-white" />,
-    },
-    {
       name: "Promissum",
       link: "/promissum",
       icon: (
         <VscSymbolKeyword className="h-4 w-4 text-neutral-500 dark:text-white" />
       ),
+    },
+    {
+      name: "Login",
+      link: "/login",
+      icon: <SlLogin className="h-4 w-4 text-neutral-500 dark:text-white" />,
     },
   ];
 
@@ -53,18 +54,20 @@ export default function AppShell(props: AppShellProps) {
   }, []);
 
   const { query } = useRouter();
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <div>
-      <FloatingNav
-        className={`font-urbanist ${
-          query.janji ? "bg-slate-50" : "bg-transparent"
-        }`}
-        navItems={navItems}
-      />
+      {pathname != "/login" && pathname != "/register" && (
+        <FloatingNav
+          className={`font-urbanist ${
+            query.janji ? "bg-slate-50" : "bg-transparent"
+          }`}
+          navItems={navItems}
+        />
+      )}
       {children}
-      {isVisible && pathname!='/promissum' && (
+      {isVisible && pathname != "/promissum" && (
         <Link
           href="#navbar"
           className="bg-black text-yellow rounded-full border border-zinc-600 p-3 text-xl fixed bottom-5 right-5 cursor-pointer"

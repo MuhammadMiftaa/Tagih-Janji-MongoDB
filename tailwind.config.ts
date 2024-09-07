@@ -46,8 +46,9 @@ const config = {
         quicksand: ["Quicksand", "sans-serif"],
       },
       colors: {
-        red: "#FF0000",
-        yellow: "#FFF311",
+        "cust-red": "#FF0000",
+        "cust-yellow": "#FFF311",
+        "red-transparent": "rgba(236, 72, 153, 0.3)",
       },
       keyframes: {
         aurora: {

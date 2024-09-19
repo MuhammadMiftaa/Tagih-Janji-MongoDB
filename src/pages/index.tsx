@@ -18,32 +18,32 @@ import useSWR from "swr";
 import { useEffect, useState } from "react";
 
 // SERVER SIDE RENDERING🤖
-export const getServerSideProps: GetServerSideProps<
-  ConnectionStatus
-> = async () => {
-  try {
-    const data1 = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/janji-presiden`
-    ).then((res) => res.json());
+// export const getServerSideProps: GetServerSideProps<
+//   ConnectionStatus
+// > = async () => {
+//   try {
+//     const data1 = await fetch(
+//       `${process.env.NEXT_PUBLIC_API_URL}/api/janji-presiden`
+//     ).then((res) => res.json());
 
-    const data2 = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/3janji`
-    ).then((res) => res.json());
+//     const data2 = await fetch(
+//       `${process.env.NEXT_PUBLIC_API_URL}/api/3janji`
+//     ).then((res) => res.json());
 
-    return {
-      props: {
-        janji: data2.data,
-        janjiPresiden: data1.data,
-        isConnected: true,
-      },
-    };
-  } catch (e) {
-    console.error(e);
-    return {
-      props: { isConnected: false },
-    };
-  }
-};
+//     return {
+//       props: {
+//         janji: data2.data,
+//         janjiPresiden: data1.data,
+//         isConnected: true,
+//       },
+//     };
+//   } catch (e) {
+//     console.error(e);
+//     return {
+//       props: { isConnected: false },
+//     };
+//   }
+// };
 // SERVER SIDE RENDERING🤖
 
 export default function Home(props: {
@@ -51,32 +51,32 @@ export default function Home(props: {
   janjiPresiden: JanjiPresidenType[];
   isConnected: boolean;
 }) {
-  const { janji, janjiPresiden } = props;
+  // const { janji, janjiPresiden } = props;
 
   // CLIENT SIDE RENDERING🤖
-  // const [janjiPresiden, setJanjiPresiden] = useState<JanjiPresidenType[]>([]);
-  // const [janji, setJanji] = useState<JanjiType[]>([]);
+  const [janjiPresiden, setJanjiPresiden] = useState<JanjiPresidenType[]>([]);
+  const [janji, setJanji] = useState<JanjiType[]>([]);
 
-  // const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-  // const {
-  //   isLoading: isLoading1,
-  //   data: data1,
-  //   error: error1,
-  // } = useSWR("/api/janji-presiden", fetcher);
-  // const {
-  //   isLoading: isLoading2,
-  //   data: data2,
-  //   error: error2,
-  // } = useSWR("/api/3janji", fetcher);
+  const {
+    isLoading: isLoading1,
+    data: data1,
+    error: error1,
+  } = useSWR("/api/janji-presiden", fetcher);
+  const {
+    isLoading: isLoading2,
+    data: data2,
+    error: error2,
+  } = useSWR("/api/3janji", fetcher);
 
-  // useEffect(() => {
-  //   isLoading1 ? setJanjiPresiden([]) : setJanjiPresiden(data1.data);
-  // }, [isLoading1, data1]);
+  useEffect(() => {
+    isLoading1 ? setJanjiPresiden([]) : setJanjiPresiden(data1.data);
+  }, [isLoading1, data1]);
 
-  // useEffect(() => {
-  //   isLoading2 ? setJanji([]) : setJanji(data2.data);
-  // }, [isLoading2, data2]);
+  useEffect(() => {
+    isLoading2 ? setJanji([]) : setJanji(data2.data);
+  }, [isLoading2, data2]);
   // CLIENT SIDE RENDERING🤖
 
   return (

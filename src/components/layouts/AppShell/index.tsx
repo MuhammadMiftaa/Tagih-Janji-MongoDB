@@ -70,7 +70,7 @@ export default function AppShell(props: AppShellProps) {
       {isVisible && pathname != "/promissum" && (
         <Link
           href="#navbar"
-          className="bg-black text-yellow rounded-full border border-zinc-600 p-3 text-xl fixed bottom-5 right-5 cursor-pointer"
+          className="bg-black text-cust-yellow rounded-full border border-zinc-600 p-3 text-xl fixed bottom-5 right-5 cursor-pointer"
         >
           <HiOutlineArrowUp />
         </Link>

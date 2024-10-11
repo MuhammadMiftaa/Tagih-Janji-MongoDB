@@ -74,7 +74,7 @@ export default function LoginPage() {
           <p className="font-poppins text-[0.8rem] font-light text-zinc-400 text-center">
             Belum punya akun?{" "}
             <LinkPreview
-              imageSrc="/gif/makan-siang-gratis.gif"
+              imageSrc="/register.png"
               isStatic={true}
               url="/register"
               className="font-semibold text-black"

@@ -113,7 +113,7 @@ export default function RegisterPage() {
           <p className="font-poppins text-[0.8rem] font-light text-zinc-400 text-center">
             Sudah punya akun?{" "}
             <LinkPreview
-              imageSrc="/gif/makan-siang-gratis.gif"
+              imageSrc="/login.png"
               isStatic={true}
               url="/login"
               className="font-semibold text-black"

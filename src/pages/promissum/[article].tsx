@@ -2,7 +2,6 @@ import client from "@/src/lib/mongodb";
 import { ArticleType } from "@/src/types/ArticleType";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import React from "react";
 import { MdFormatQuote } from "react-icons/md";
 import moment from "moment";
@@ -16,7 +15,7 @@ export const getServerSideProps: GetServerSideProps<ConnectionStatus> = async (
 ) => {
   const id = context.query.article;
   try {
-    await client.connect(); // `await client.connect()` will use the default database passed in the MONGODB_URI
+    await client.connect();
     const data = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/artikel/${id}`
     ).then((res) => res.json());

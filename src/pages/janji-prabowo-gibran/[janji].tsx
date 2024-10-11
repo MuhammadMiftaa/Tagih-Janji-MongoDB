@@ -2,10 +2,9 @@ import { TracingBeam } from "@/src/components/ui/tracing-beam";
 import client from "@/src/lib/mongodb";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import React from "react";
-import { twMerge } from "tailwind-merge";
 
 type ConnectionStatus = {
   isConnected: boolean;
@@ -16,7 +15,7 @@ export const getServerSideProps: GetServerSideProps<ConnectionStatus> = async (
 ) => {
   const param = context.query.janji;
   try {
-    await client.connect(); // `await client.connect()` will use the default database passed in the MONGODB_URI
+    await client.connect();
 
     const janji = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/3janji/${param}`

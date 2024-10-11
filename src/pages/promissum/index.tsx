@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps<
   ConnectionStatus
 > = async () => {
   try {
-    await client.connect(); // `await client.connect()` will use the default database passed in the MONGODB_URI
+    await client.connect();
     const data = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/artikel`
     ).then((res) => res.json());

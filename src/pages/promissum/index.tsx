@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ArticleType } from "@/src/types/ArticleType";
 import { Highlight } from "@/src/components/ui/hero-highlight";
 import Image from "next/image";
@@ -12,7 +12,9 @@ import { AuroraBackground } from "@/src/components/ui/aurora-background";
 import { motion } from "framer-motion";
 import { FiEdit3 } from "react-icons/fi";
 import { AnimatedTooltip } from "@/src/components/ui/animated-tooltip";
+import { set } from "zod";
 
+// SERVER SIDE RENDERING🤖
 type ConnectionStatus = {
   isConnected: boolean;
 };
@@ -35,9 +37,19 @@ export const getServerSideProps: GetServerSideProps<
     };
   }
 };
+// SERVER SIDE RENDERING🤖
 
 export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
   const { dataArtikel } = props;
+
+  // CLIENT SIDE RENDERING🤖
+  // const [dataArtikel, setDataArtikel] = useState<ArticleType[]>([]);
+  // const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  // const { data, error, isLoading } = useSWR("/api/artikel", fetcher);
+  // useEffect(() => {
+  //   isLoading ? setDataArtikel([]) : setDataArtikel(data.data);
+  // }, [data, isLoading]);
+  // CLIENT SIDE RENDERING🤖
 
   return (
     <div className="pt-40 pb-20 px-48 relative">
@@ -94,8 +106,18 @@ export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
         })}
       </div>
       {/* <AnimatedTooltip item={{id: 1, name: "Tulis Artikel", designation: "disini"}} /> */}
-      <Link href={"/promissum/exigere"} className="flex flex-row items-center justify-center fixed bottom-7 right-7">
-        <AnimatedTooltip item={{id: 1, name: "Mulai Menulis", designation: "Klik disini", image: "/write.png"}} />
+      <Link
+        href={"/promissum/exigere"}
+        className="flex flex-row items-center justify-center fixed bottom-7 right-7"
+      >
+        <AnimatedTooltip
+          item={{
+            id: 1,
+            name: "Mulai Menulis",
+            designation: "Klik disini",
+            image: "/write.png",
+          }}
+        />
       </Link>
     </div>
   );

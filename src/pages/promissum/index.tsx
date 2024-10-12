@@ -15,40 +15,40 @@ import { AnimatedTooltip } from "@/src/components/ui/animated-tooltip";
 import { set } from "zod";
 
 // SERVER SIDE RENDERING🤖
-// type ConnectionStatus = {
-//   isConnected: boolean;
-// };
+type ConnectionStatus = {
+  isConnected: boolean;
+};
 
-// export const getServerSideProps: GetServerSideProps<
-//   ConnectionStatus
-// > = async () => {
-//   try {
-//     await client.connect(); // `await client.connect()` will use the default database passed in the MONGODB_URI
-//     const data = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/api/artikel`
-//     ).then((res) => res.json());
-//     return {
-//       props: { dataArtikel: data.data, isConnected: true },
-//     };
-//   } catch (e) {
-//     console.error(e);
-//     return {
-//       props: { isConnected: false },
-//     };
-//   }
-// };
+export const getServerSideProps: GetServerSideProps<
+  ConnectionStatus
+> = async () => {
+  try {
+    await client.connect(); // `await client.connect()` will use the default database passed in the MONGODB_URI
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/artikel`
+    ).then((res) => res.json());
+    return {
+      props: { dataArtikel: data.data, isConnected: true },
+    };
+  } catch (e) {
+    console.error(e);
+    return {
+      props: { isConnected: false },
+    };
+  }
+};
 // SERVER SIDE RENDERING🤖
 
 export default function PromissumPage(props: { dataArtikel: ArticleType[] }) {
-  // const { dataArtikel } = props;
+  const { dataArtikel } = props;
 
   // CLIENT SIDE RENDERING🤖
-  const [dataArtikel, setDataArtikel] = useState<ArticleType[]>([]);
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data, error, isLoading } = useSWR("/api/artikel", fetcher);
-  useEffect(() => {
-    isLoading ? setDataArtikel([]) : setDataArtikel(data.data);
-  }, [data, isLoading]);
+  // const [dataArtikel, setDataArtikel] = useState<ArticleType[]>([]);
+  // const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  // const { data, error, isLoading } = useSWR("/api/artikel", fetcher);
+  // useEffect(() => {
+  //   isLoading ? setDataArtikel([]) : setDataArtikel(data.data);
+  // }, [data, isLoading]);
   // CLIENT SIDE RENDERING🤖
 
   return (
